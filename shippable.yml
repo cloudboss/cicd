@@ -29,7 +29,8 @@ jobs:
   - TASK: managed
   - IN: version-v1.11.2-rc
   - IN: keights-v1.11
-- name: keights
+- name: keights_runCI
   type: runCI
   steps:
+  - IN: keights_ciRepo
   - IN: bump-version
