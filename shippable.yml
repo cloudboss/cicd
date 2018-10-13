@@ -9,9 +9,6 @@ resources:
   integration: github
   versionTemplate:
     sourceName: cloudboss/keights
-    branches:
-      only:
-      - v1.11
     buildOnCommit: false
     buildOnPullRequest: true
     depth: 10
