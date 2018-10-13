@@ -1,3 +1,35 @@
 resources:
 - name: cicd_master
   type: syncRepo
+- name: shippable-ami-builder
+  type: integration
+  integration: shippable-ami-builder
+- name: keights-v1.11
+  type: gitRepo
+  integration: github
+  versionTemplate:
+    sourceName: cloudboss/keights
+    branches:
+      only:
+      - v1.11
+    buildOnCommit: false
+    buildOnPullRequest: true
+    depth: 10
+- name: version-v1.11.2-rc
+  type: version
+  versionTemplate:
+    versionName: v1.11.2
+
+jobs:
+- name: bump-version
+  type: release
+  bump: rc
+  dependencyMode: chrono
+  steps:
+  - TASK: managed
+  - IN: version-v1.11.2-rc
+  - IN: keights-v1.11
+- name: keights
+  type: runCI
+  steps:
+  - IN: bump-version
