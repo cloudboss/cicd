@@ -26,8 +26,15 @@ jobs:
   - TASK: managed
   - IN: version-v1.11.2-rc
   - IN: keights-v1.11
-- name: keights_runCI
-  type: runCI
+- name: keights_build
+  type: runSh
   steps:
-  - IN: keights_ciRepo
+  - IN: keights-v1.11
   - IN: bump-version
+  - TASK:
+      runtime:
+        options:
+          imageName: golang
+          imageTag: 1.11
+      script:
+        - make test
