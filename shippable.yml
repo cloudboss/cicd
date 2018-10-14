@@ -41,4 +41,5 @@ jobs:
         - env
         - find ${BUILD_DIR}
         - unset GOPATH
+        - cd ${KEIGHTSV111_STATE}
         - make test
